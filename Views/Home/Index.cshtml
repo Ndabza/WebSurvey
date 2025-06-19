@@ -1,0 +1,145 @@
+﻿@using WebSurvey.Models;
+@model SurveyViewModel
+@{
+
+}
+
+<div class="customForm">
+
+    <div></div>
+    @if (Model.FoodTypeList!.Count() == 0 || Model.Questions!.Count() == 0)
+    {
+        <p style="color:red">@ViewData["OnGetError"]!.ToString()</p>
+    }
+    else if (Model.FoodTypeList!.Count() != 0 || Model.Questions!.Count() != 0)
+    {
+        @if (ViewData["OnSaveError"]!.ToString() != "")
+        {
+            <p style="color:red">@ViewData["OnSaveError"]!.ToString()</p>
+        }
+
+        <form asp-action="SaveSurvey" method="post" asp-controller="Home">
+            <div class="row">
+                <div class="col-md-3">
+                    <div>Personel Details:</div>
+                </div>
+                <div class="col-md-9">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Person.FullNames"></label>
+                        <input class="form-control" asp-for="Person.FullNames" id="dateInput" />
+                        <span asp-validation-for="Person.FullNames" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Person.Email"></label>
+                        <input class="form-control" asp-for="Person.Email" />
+                        <span asp-validation-for="Person.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Person.DateOfBirth"></label>
+                        <input class="form-control" asp-for="Person.DateOfBirth" />
+                        <span asp-validation-for="Person.DateOfBirth" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Person.ContactNumber"></label>
+                        <input type="number" class="form-control" asp-for="Person.ContactNumber" />
+                        <span asp-validation-for="Person.ContactNumber" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-3">
+                        <span asp-validation-for="FoodList" class="text-danger"></span>
+                        <label class="" asp-for="Person.FavoriteFood"></label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-check">
+                            @foreach (var food in Model.FoodTypeList!)
+                            {
+                                <label style="width:18%;">
+                                    <input class="form-check-input" type="checkbox" name="FoodList" value="@food.Id" /> @food.FoodName
+                                </label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div>
+                <div>Please rate your level of agreement on scale 1 to 5  with 1 being "strongly agree" and 5 being "strongly disagree"</div>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Strongly Agree</th>
+                            <th>Agree</th>
+                            <th>Neutral</th>
+                            <th>Disagree</th>
+                            <th>Strongly Disagree</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Questions![0].SurveyQuestion<span asp-validation-for="QuestionView.Question1" class="text-danger"></span></td>
+                            <td><input type="radio" asp-for="QuestionView.Question1" value="1,@Model.Questions![0].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question1" value="2,@Model.Questions![0].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question1" value="3,@Model.Questions![0].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question1" value="4,@Model.Questions![0].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question1" value="5,@Model.Questions![0].Id" /></td>
+                        </tr>
+                        <tr>
+                            <td>@Model.Questions![1].SurveyQuestion<span asp-validation-for="QuestionView.Question2" class="text-danger"></span></td>
+                            <td><input type="radio" asp-for="QuestionView.Question2" value="1,@Model.Questions![1].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question2" value="2,@Model.Questions![1].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question2" value="3,@Model.Questions![1].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question2" value="4,@Model.Questions![1].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question2" value="5,@Model.Questions![1].Id" /></td>
+                        </tr>
+                        <tr>
+                            <td>@Model.Questions![2].SurveyQuestion<span asp-validation-for="QuestionView.Question3" class="text-danger"></span></td>
+                            <td><input type="radio" asp-for="QuestionView.Question3" value="1,@Model.Questions![2].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question3" value="2,@Model.Questions![2].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question3" value="3,@Model.Questions![2].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question3" value="4,@Model.Questions![2].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question3" value="5,@Model.Questions![2].Id" /></td>
+                        </tr>
+                        <tr>
+                            <td>@Model.Questions![3].SurveyQuestion<span asp-validation-for="QuestionView.Question4" class="text-danger"></span></td>
+                            <td><input type="radio" asp-for="QuestionView.Question4" value="1,@Model.Questions![3].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question4" value="2,@Model.Questions![3].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question4" value="3,@Model.Questions![3].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question4" value="4,@Model.Questions![3].Id" /></td>
+                            <td><input type="radio" asp-for="QuestionView.Question4" value="5,@Model.Questions![3].Id" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div>
+                <input class="form-control" type="submit" value="Submit" />
+            </div>
+
+        </form>
+
+    }
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

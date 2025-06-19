@@ -1,0 +1,97 @@
+﻿@model WebSurvey.Models.Statistics
+
+@{
+}
+
+<div>
+
+    <h4 style="text-align:center">Survey Results</h4>
+    <br />
+    @if (ViewData["Error"]!.ToString() == "")
+    {
+        @if (Model.TotalNumberOfSurveys == 0)
+        {
+            <p style="text-align:center; color:green;">No Surveys Available.</p>
+        }
+        <div class="statistics">
+            <dl class="row">
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.TotalNumberOfSurveys)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.TotalNumberOfSurveys)
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.AverageAge)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.AverageAge)
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.OldestPersonWhoParticipated)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.OldestPersonWhoParticipated)
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.YoungestPersonWhoParticipated)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.YoungestPersonWhoParticipated)
+                </dd>
+            </dl>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PercentageOfPeopleWhoLikePizza)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PercentageOfPeopleWhoLikePizza)%
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PercentageOfPeopleWhoLikePasta)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PercentageOfPeopleWhoLikePasta)%
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PercentageOfPeopleWhoLikePapandWors)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PercentageOfPeopleWhoLikePapandWors)%
+                </dd>
+            </dl>
+            <br />
+            <dl class="row">
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PeopleWhoLikeToWatchMovies)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PeopleWhoLikeToWatchMovies)
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PeopleWhoLikeToListenToRadio)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PeopleWhoLikeToListenToRadio)
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PeopleWhoLikeToEatOut)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PeopleWhoLikeToEatOut)
+                </dd>
+                <dt class="col-sm-7">
+                    @Html.DisplayNameFor(model => model.PeopleWhoLikeToWatchTV)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.PeopleWhoLikeToWatchTV)
+                </dd>
+            </dl>
+        </div>
+    }
+    else if(ViewData["Error"]!.ToString() != "")
+    {
+        <p style="color:red;">@ViewData["Error"]!.ToString()</p>
+    }
+</div>
