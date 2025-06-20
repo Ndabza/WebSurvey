@@ -107,44 +107,49 @@ public class SurveyService : ISurveyService
             var foodList = _surveyContext.FoodType.ToList();
             var answers = _surveyContext.Answer.ToList();
 
-            var ageList = AgeList(people);
-            var averageAge = (ageList.Sum()) / (ageList.Count());
+            if (surveys.Count() != 0)
+            {
+                var ageList = AgeList(people);
+                var averageAge = (ageList.Sum()) / (ageList.Count());
 
-            var surveyCount = surveys.Count;
+                var surveyCount = surveys.Count;
 
-            var pizzaId = foodList.FirstOrDefault(x => x.FoodName == "Pizza")!.Id;
-            var pastaId = foodList.FirstOrDefault(x => x.FoodName == "Pasta")!.Id;
-            var papAndWorsId = foodList.FirstOrDefault(x => x.FoodName == "Pap and Wors")!.Id;
+                var pizzaId = foodList.FirstOrDefault(x => x.FoodName == "Pizza")!.Id;
+                var pastaId = foodList.FirstOrDefault(x => x.FoodName == "Pasta")!.Id;
+                var papAndWorsId = foodList.FirstOrDefault(x => x.FoodName == "Pap and Wors")!.Id;
 
-            var question1Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to watch movies.")!.Id;
-            var question2Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to listen to radio.")!.Id;
-            var question3Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to eat out.")!.Id;
-            var question4Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to watch TV.")!.Id;
+                var question1Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to watch movies.")!.Id;
+                var question2Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to listen to radio.")!.Id;
+                var question3Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to eat out.")!.Id;
+                var question4Id = questions.FirstOrDefault(x => x.SurveyQuestion == "I like to watch TV.")!.Id;
 
-            decimal pizzaPercentage = Convert.ToDecimal(faveriteFood.Where(x => x.FoodTypeId == pizzaId).Count())
-                / Convert.ToDecimal(surveyCount) * 100m;
-            decimal pastaPercentage = Convert.ToDecimal(faveriteFood.Where(x => x.FoodTypeId == pastaId).Count())
-                / Convert.ToDecimal(surveyCount) * 100m;
-            decimal papAndWorsPercentage = Convert.ToDecimal(faveriteFood.Where(x => x.FoodTypeId == papAndWorsId).Count())
-                / Convert.ToDecimal(surveyCount) * 100m;
+                decimal pizzaPercentage = Convert.ToDecimal(faveriteFood.Where(x => x.FoodTypeId == pizzaId).Count())
+                    / Convert.ToDecimal(surveyCount) * 100m;
+                decimal pastaPercentage = Convert.ToDecimal(faveriteFood.Where(x => x.FoodTypeId == pastaId).Count())
+                    / Convert.ToDecimal(surveyCount) * 100m;
+                decimal papAndWorsPercentage = Convert.ToDecimal(faveriteFood.Where(x => x.FoodTypeId == papAndWorsId).Count())
+                    / Convert.ToDecimal(surveyCount) * 100m;
 
-            var statistics = new Statistics();
+                var statistics = new Statistics();
 
-            statistics.TotalNumberOfSurveys = surveyCount;
-            statistics.AverageAge = Convert.ToInt32(averageAge);
-            statistics.OldestPersonWhoParticipated = ageList.Max();
-            statistics.YoungestPersonWhoParticipated = ageList.Min();
+                statistics.TotalNumberOfSurveys = surveyCount;
+                statistics.AverageAge = Convert.ToInt32(averageAge);
+                statistics.OldestPersonWhoParticipated = ageList.Max();
+                statistics.YoungestPersonWhoParticipated = ageList.Min();
 
-            statistics.PercentageOfPeopleWhoLikePizza = ((int)Math.Round(pizzaPercentage));
-            statistics.PercentageOfPeopleWhoLikePasta = ((int)Math.Round(pastaPercentage));
-            statistics.PercentageOfPeopleWhoLikePapandWors = ((int)Math.Round(papAndWorsPercentage));
+                statistics.PercentageOfPeopleWhoLikePizza = ((int)Math.Round(pizzaPercentage));
+                statistics.PercentageOfPeopleWhoLikePasta = ((int)Math.Round(pastaPercentage));
+                statistics.PercentageOfPeopleWhoLikePapandWors = ((int)Math.Round(papAndWorsPercentage));
 
-            statistics.PeopleWhoLikeToWatchMovies = AverageOfRating(answers, question1Id!);
-            statistics.PeopleWhoLikeToListenToRadio = AverageOfRating(answers, question2Id!);
-            statistics.PeopleWhoLikeToEatOut = AverageOfRating(answers, question3Id!);
-            statistics.PeopleWhoLikeToWatchTV = AverageOfRating(answers, question4Id!);
+                statistics.PeopleWhoLikeToWatchMovies = AverageOfRating(answers, question1Id!);
+                statistics.PeopleWhoLikeToListenToRadio = AverageOfRating(answers, question2Id!);
+                statistics.PeopleWhoLikeToEatOut = AverageOfRating(answers, question3Id!);
+                statistics.PeopleWhoLikeToWatchTV = AverageOfRating(answers, question4Id!);
 
-            return statistics;
+                return statistics; 
+            }
+
+            return new Statistics();
         }
         catch (Exception)
         {
