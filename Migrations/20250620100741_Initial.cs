@@ -13,58 +13,52 @@ namespace WebSurvey.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySQL:Charset", "utf8mb4");
-
             migrationBuilder.CreateTable(
                 name: "FoodType",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    FoodName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    FoodName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FoodType", x => x.Id);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Person",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    FullNames = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    FullNames = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ContactNumber = table.Column<string>(type: "TEXT", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Person", x => x.Id);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Question",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    SurveyQuestion = table.Column<string>(type: "varchar(254)", maxLength: 254, nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    SurveyQuestion = table.Column<string>(type: "TEXT", maxLength: 254, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Question", x => x.Id);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "FaveriteFood",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    PersonId = table.Column<string>(type: "varchar(128)", nullable: false),
-                    FoodTypeId = table.Column<string>(type: "varchar(128)", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    PersonId = table.Column<string>(type: "TEXT", nullable: false),
+                    FoodTypeId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,15 +75,14 @@ namespace WebSurvey.Migrations
                         principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Survey",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    PersonId = table.Column<string>(type: "varchar(128)", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    PersonId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,16 +93,15 @@ namespace WebSurvey.Migrations
                         principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Answer",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    QuestionId = table.Column<string>(type: "varchar(128)", nullable: false),
-                    Choice = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    QuestionId = table.Column<string>(type: "TEXT", nullable: false),
+                    Choice = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,16 +112,15 @@ namespace WebSurvey.Migrations
                         principalTable: "Question",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "SurveyResponse",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false),
-                    SurveyId = table.Column<string>(type: "varchar(128)", nullable: true),
-                    QuestionId = table.Column<string>(type: "varchar(128)", nullable: true)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    SurveyId = table.Column<string>(type: "TEXT", nullable: true),
+                    QuestionId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -144,8 +135,7 @@ namespace WebSurvey.Migrations
                         column: x => x.SurveyId,
                         principalTable: "Survey",
                         principalColumn: "Id");
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.InsertData(
                 table: "FoodType",

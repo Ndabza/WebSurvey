@@ -14,7 +14,8 @@ public class SurveyContext:DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseMySQL(_Configuration.GetConnectionString("Default")!);
+        //optionsBuilder.UseMySQL(_Configuration.GetConnectionString("Default")!);
+        optionsBuilder.UseSqlite(_Configuration.GetConnectionString("Default")!);
     }
 
     public DbSet<Person> Person { get; set; }
