@@ -1,9 +1,5 @@
 Web Survey
 
-<p align="center">
-  <img src="" alt="Animated GIF showing the survey and stats pages">
-</p>
-
 A simple .Net 9.0 Mvc Web Survey Application
 
 ## 📝 Table of Contents
